@@ -48,6 +48,8 @@ public class Board {
 	int ySize;
 
 	char board_marker;
+	ship[] theShips;
+	int numberOfShips;
 
 	/**
 	 * Must have valid dimensions and board marker
@@ -67,8 +69,9 @@ public class Board {
 	 * @param x              Int
 	 * @param y              Int
 	 * @param t_board_marker Char
+	 * @param numberOfShips Int
 	 */
-	public Board(int x, int y, char t_board_marker) {
+	public Board(int x, int y, char t_board_marker, int numberOfShips) {
 		this.xSize = 0;
 		this.ySize = 0;
 		this.board_marker = '\0';
@@ -83,6 +86,12 @@ public class Board {
 			for (int k = 0; k < this.xSize; k++) {
 				this.map[i][k] = this.board_marker;
 			}
+		}
+
+		this.numberOfShips = numberOfShips;
+		this.theShips = new ship[numberOfShips];
+		for(int i = 0; i < numberOfShips; i++) {
+			theShips[i] = new ship(i);
 		}
 	}
 
@@ -151,8 +160,8 @@ public class Board {
 	 *
 	 * @return Board
 	 */
-	public Board getCopyBoard() {
-		Board copy = new Board(this.xSize, this.ySize, this.board_marker);
+	public Board getCopyBoard(Board copy) {
+		copy = new Board(this.xSize, this.ySize, this.board_marker, this.numberOfShips);
 		for (int i = 0; i < this.ySize; i++) {
 			for (int k = 0; k < this.xSize; k++) {
 				copy.addMarker(this.map[i][k], i, k);
@@ -160,6 +169,13 @@ public class Board {
 		}
 		return copy;
 	}
+
+
+	//copy constructor
+	Board(Board c) {
+		getCopyBoard(c);
+	}
+
 
 	/**
 	 * This returns the X size of the array
@@ -248,4 +264,15 @@ public class Board {
 	public char getMarker(int x, int y) {
 		return this.map[y][x];
 	}
+
+	public void setShipCoordinates(int shipNum, int row, int col) {
+		coorpair Pair = new coorpair(row, col);
+		theShips[shipNum - 1].setShipCors(Pair);
+	}
+
+	public int getNumberOfShips() {
+		return numberOfShips;
+	}
+
+	
 }
