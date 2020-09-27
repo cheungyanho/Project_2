@@ -9,16 +9,14 @@ design decision. This way it'll be a bit more modular even internally.
 */
 
 public class Utility {
-    private Scanner consoleInput = new Scanner(System.in);
+    public static Scanner consoleInput = new Scanner(System.in);
     private char[] coordinateLetters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
     private void clearTerminal() {
         for (int i = 0; i < 50; i++) {
             System.out.println("");
         }
     }
-    private int letterToInt(char col) {
-        
-    }
+    
     private boolean validateShipNum() {
         
     }
@@ -28,30 +26,8 @@ public class Utility {
     private int safelyGetIntInput() {
         
     }
-    private class safelyGetCoordinates {
-        private boolean invalidInput = true;
-        private String input = "";
-        private String output = "";
-        private boolean colValid;
-        private boolean rowValid;
-        private int numLoc;
-        char col = 'z';
-        char row = 'z';
-
-        private boolean convertCoordinates() {
-            try {
-                numLoc = letterToInt(col);
-                colValid = true;
-            } catch(IllegalArgumentException iae) {
-                errorMessage(iae, "Please input coordinates within the range of A1 - I9");
-                colValid = false;
-            }
-        }
-        public String getCoordinates() {
-            while(true) {
-                input = consoleInput.next();
-            }
-        }
+    public class safelyGetCoordinates {
+        
         
     }
 

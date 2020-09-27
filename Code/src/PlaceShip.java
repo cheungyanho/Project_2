@@ -9,12 +9,13 @@ public class PlaceShip {
     private int size;
     private boolean directionSucceeded;
 
-    public PlaceShip(Board theBoard, int theSize, String shipId, int rowPlace, int colPlace){
+    public PlaceShip(Board theBoard, int theSize, String shipId, int rowPlace, int colPlace, int numShips){
         this.board = theBoard;
         this.shipNumber = shipId;
         this.isHori = false;
         this.directionSucceeded = false;
         this.size = theSize + 1;
+        
         
     }
    
@@ -41,7 +42,7 @@ public class PlaceShip {
         return placeRecurse(row, col, size);
     }
 
-    public void place() {
+    public void place(ship theShip) {
         try {
             if(placeIt()){
                 setShipDirection(true);
