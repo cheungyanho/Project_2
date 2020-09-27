@@ -12,9 +12,13 @@ public class GameLoop {
 
 
     public void askForShipNum(int player) {
-        System.out.println("Select the number of ships you will use.");
-        int num = 0;
-        num = consoleInput.nextInt();
+        do {
+          System.out.println("Select the number of ships you will use.");
+          int num = 0;
+          boolean validShipNum=false;
+          num = consoleInput.nextInt();
+          validShipNum=Tools.validateShipNum(num);
+        } while (validShipNum==false);
         if(player == 1) {
             player1Board = new Board(9, 9, '~', num);
         } else {
@@ -44,7 +48,7 @@ public class GameLoop {
     }
 
     public void Game(){
-        
+
     }
-    
+
 }

@@ -136,13 +136,13 @@ public class Executive {
    *         message to the console
    *
    */
-  public boolean validateShipNum(int num) {
+/*  public boolean validateShipNum(int num) {
     if (num > 5 || num < 1) {
       System.out.println("Please input an int from 1 to 5.");
       return (false);
     }
     return (true);
-  }
+  }*/
 
   /**
    *

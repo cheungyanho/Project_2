@@ -17,9 +17,31 @@ public class Utility {
         }
     }
 
-    private boolean validateShipNum() {
-
+    /**
+     *
+     * Validates that the input is an int from 1 to 5, inclusive.
+     *
+     *
+     * @param num The int to validate
+     * @return True if the value of num valid, otherwise returns false and prints a
+     *         message to the console
+     *
+     */
+    private boolean validateShipNum(int num) {
+      if (num > 5 || num < 1) {
+        System.out.println("Please input an int from 1 to 5.");
+        return (false);
+      }
+      return (true);
     }
+
+    /**
+     * Displays the menu in the console.
+     *
+     * @pre: Calling clearTerminal() beforehand is recommended, but not required
+     * @post: The menu will be displayed
+     *
+     */  
     private void printMenu() {
       System.out.println("Menu:");
       System.out.println("1) Attack!!");
