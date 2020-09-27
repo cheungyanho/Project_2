@@ -5,7 +5,7 @@ import java.util.Scanner;
 Note for others: the utility class contains
 an interior class mainly because it was long and suited to be its own class
 but it also uses some of the private methods here. just seemed like an appropriate
-design decision. This way it'll be a bit more modular even internally. 
+design decision. This way it'll be a bit more modular even internally.
 */
 
 public class Utility {
@@ -16,27 +16,32 @@ public class Utility {
             System.out.println("");
         }
     }
-    
+
     private boolean validateShipNum() {
-        
+
     }
     private void printMenu() {
-
+      System.out.println("Menu:");
+      System.out.println("1) Attack!!");
+      System.out.println("2) See your board");//do we need this if the board is printing more often
+      System.out.println("3) Attack history");
+      System.out.println("4) Forfeit the match");
+      System.out.println("CHOICE:");
     }
     private int safelyGetIntInput() {
-        
+
     }
     public class safelyGetCoordinates {
-        
-        
+
+
     }
 
-    
+
     public static void errorMessage(IllegalArgumentException iae, String message) {
         System.out.println(iae.getMessage());
         System.out.println(message);
     }
-    
+
 
     private void getInput() {
         //safelyGetCoordinates.getCoordinates();
@@ -47,7 +52,6 @@ public class Utility {
 
     }
     public void runUtility(){
-        
+
     }
 }
-
