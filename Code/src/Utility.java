@@ -41,7 +41,7 @@ public class Utility {
      * @pre: Calling clearTerminal() beforehand is recommended, but not required
      * @post: The menu will be displayed
      *
-     */  
+     */
     private void printMenu() {
       System.out.println("Menu:");
       System.out.println("1) Attack!!");
@@ -50,8 +50,25 @@ public class Utility {
       System.out.println("4) Forfeit the match");
       System.out.println("CHOICE:");
     }
-    private int safelyGetIntInput() {
+    /**
 
+    */
+    private int safelyGetIntInput() {
+      boolean invalidInput = true;
+          String input = "";
+          int output = 0;
+          do {
+            input = consoleInput.next();
+            try {
+              output = Integer.parseInt(input);
+              invalidInput = false;
+            } catch (NumberFormatException nfe) {
+              System.out.println("Please input an int.");
+              input = consoleInput.nextLine();
+            }
+
+          } while (invalidInput);
+          return (output);
     }
     public class safelyGetCoordinates {
 
@@ -66,14 +83,23 @@ public class Utility {
 
 
     private void getInput() {
-        //safelyGetCoordinates.getCoordinates();
         //input.getCoordinates();
+        chooseShipNum();
+        safelyGetCoordinates input = new safelyGetCoordinates();
+        input.getCoordinates();
     }
 
     private void chooseShipNum() {
-
+      boolean invalidInput = true;
+      System.out.println("Welcome to the game of Battleship!");
+      System.out.println("How many ships (per person) would you like to play with (1-5)?");
+      int numberOfShips = 0;
+      do {
+        numberOfShips = safelyGetIntInput();
+      }while (validateShipNum(numberOfShips) == false);
     }
     public void runUtility(){
+      getInput();
 
     }
 }
