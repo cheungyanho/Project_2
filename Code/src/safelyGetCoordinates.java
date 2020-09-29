@@ -8,8 +8,13 @@ public class safelyGetCoordinates {
     private int numLoc = 0;
     private char col = 'z';
     private char row = 'z';
-    private int column = 0;
-    private int rowboat = 0;
+    private int column;
+    private int rowboat;
+
+    safelyGetCoordinates(){
+        this.column = 0;
+        this.row = 0;
+    }
 
     public int getRow() {
         return rowboat;
@@ -68,7 +73,7 @@ public class safelyGetCoordinates {
                 }
             }
 
-        } while (!invalidInput);
+        } while (invalidInput);
         return (output);
     }
 }

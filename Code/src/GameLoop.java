@@ -18,6 +18,7 @@ public class GameLoop {
     public GameLoop() {
         this.player1UI = new getUserInput(1);
         this.player2UI = new getUserInput(2);
+        this.getCoor = new safelyGetCoordinates();
     }
 
 
