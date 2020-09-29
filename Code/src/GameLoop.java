@@ -69,12 +69,17 @@ public class GameLoop {
             }
 
         } while(playerWon[0]||playerWon[1]);
+        if(playerWon[0]){
+            System.out.println("Congratulations! Player 1 has won.");
+        } else {
+            System.out.println("Congratulations! Player 2 has won.");
+        }
     }
 
     private void markBoard(Board opponent){
         Tools.clearTerminal();
-        player1Printer.print(true);
-        player2Printer.print(true);
+        player1Printer.print(false);
+        player2Printer.print(false);
         getCoor.getCoordinates();
         if(opponent.getMarker(getCoor.getRow() - 1, getCoor.getCol() - 1) == 's'){
             opponent.addMarker('x', getCoor.getRow() - 1, getCoor.getCol() - 1);
