@@ -10,7 +10,7 @@ public class getUserInput {
         this.player = number;
     }
 
-    private void askForShipNum(Board playerboard, Scanner input) {
+    private int askForShipNum(Board playerboard, Scanner input) {
         do {
             System.out.println("Select the number of ships you will use.");
             try{
@@ -19,12 +19,8 @@ public class getUserInput {
             catch (InputMismatchException ime) {
             System.out.println("Please input an int.");
         }
-        } while (Utility.validateShipNum(num));
-        if (player == 1) {
-            playerboard = new Board(9, 9, '~', num, "player1Board");
-        } else {
-            playerboard = new Board(9, 9, '~', num, "player2Board");
-        }
+        } while (!Utility.validateShipNum(num));
+        return num;
 
     }
 
@@ -36,7 +32,7 @@ public class getUserInput {
         return input.nextInt();
     }
 
-    public void runInterface(Board ba, Scanner in){
-        askForShipNum(ba, in);
+    public int runInterface(Board ba, Scanner in){
+        return askForShipNum(ba, in);
     }
 }

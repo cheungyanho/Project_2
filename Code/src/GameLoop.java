@@ -25,9 +25,13 @@ public class GameLoop {
     }
 
     public void Init(){
-        player1UI.runInterface(player1Board, consoleInput);
+        int num1 = 0;
+        int num2 = 0;
+        num1 = player1UI.runInterface(player1Board, consoleInput);
+        player1Board = new Board(9, 9, '~', num1, "player1Board");
         placeShipLoop(player1Board, player1Printer);
-        player2UI.runInterface(player2Board, consoleInput);
+        num2 = player2UI.runInterface(player2Board, consoleInput);
+        player2Board = new Board(9, 9, '~', num2, "player1Board");
         placeShipLoop(player2Board, player2Printer);
     }
 
