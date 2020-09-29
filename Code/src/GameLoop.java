@@ -12,10 +12,10 @@ public class GameLoop {
 
 
     public void askForShipNum(int player) {
+        boolean validShipNum = false;
         do {
           System.out.println("Select the number of ships you will use.");
           int num = 0;
-          boolean validShipNum=false;
           num = consoleInput.nextInt();
           validShipNum=Tools.validateShipNum(num);
         } while (validShipNum==false);
@@ -43,7 +43,7 @@ public class GameLoop {
 
     public void Loop(){
         do {
-
+            Tools.printMenu();
         } while();
     }
 

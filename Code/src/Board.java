@@ -50,6 +50,8 @@ public class Board {
 	char board_marker;
 	ship[] theShips;
 	int numberOfShips;
+	boolean[] hasSunk;
+	int sunkCounter; 
 
 	/**
 	 * Must have valid dimensions and board marker
@@ -93,6 +95,12 @@ public class Board {
 		for(int i = 0; i < numberOfShips; i++) {
 			theShips[i] = new ship(i);
 		}
+
+		this.hasSunk = new boolean[numberOfShips];
+		for(int i = 0; i < numberOfShips; i++) {
+			this.hasSunk[i] = false;
+		}
+		this.sunkCounter = 0;
 	}
 
 	/**
@@ -274,5 +282,11 @@ public class Board {
 		return numberOfShips;
 	}
 
-	
+	private boolean fleetSunk(ship[] sp){
+		
+	}
+
+	public boolean fleetHasSunk(){
+		if
+	}
 }
