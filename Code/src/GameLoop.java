@@ -27,7 +27,7 @@ public class GameLoop {
         for(int i = 0; i < playerBoard.getNumberOfShips(); i++) {
             playerWrapper.print(false);
             getCoor.getCoordinates();
-            if(CollisionHandler.check(playerBoard, 's', getCoor.getRow(), getCoor.getCol())){
+            if(!CollisionHandler.check(playerBoard, 's', getCoor.getRow(), getCoor.getCol())){
                 playerBoard.setShipCoordinates(i, getCoor.getRow(), getCoor.getCol());
             } else {
                 System.out.println("Place the ship elsewhere.");
