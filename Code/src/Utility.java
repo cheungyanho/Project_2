@@ -42,6 +42,7 @@ public class Utility {
      *
      */  
     public void printMenu() {
+
       System.out.println("Menu:");
       System.out.println("1) Attack!!");
       //System.out.println("2) See your board");//do we need this if the board is printing more often
@@ -49,7 +50,6 @@ public class Utility {
       System.out.println("2) Forfeit the match");
       System.out.println("CHOICE:");
     }
-    
 
 
     public static void errorMessage(IllegalArgumentException iae, String message) {
@@ -59,14 +59,23 @@ public class Utility {
 
 
     private void getInput() {
-        //safelyGetCoordinates.getCoordinates();
         //input.getCoordinates();
+        chooseShipNum();
+        safelyGetCoordinates input = new safelyGetCoordinates();
+        input.getCoordinates();
     }
 
     private void chooseShipNum() {
-
+      boolean invalidInput = true;
+      System.out.println("Welcome to the game of Battleship!");
+      System.out.println("How many ships (per person) would you like to play with (1-5)?");
+      int numberOfShips = 0;
+      do {
+        numberOfShips = safelyGetIntInput();
+      }while (validateShipNum(numberOfShips) == false);
     }
     public void runUtility(){
+      getInput();
 
     }
 
