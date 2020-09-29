@@ -50,6 +50,9 @@ public class Board {
 	char board_marker;
 	ship[] theShips;
 	int numberOfShips;
+	boolean[] hasSunk;
+	int sunkCounter; 
+	String name;
 
 	/**
 	 * Must have valid dimensions and board marker
@@ -71,7 +74,7 @@ public class Board {
 	 * @param t_board_marker Char
 	 * @param numberOfShips Int
 	 */
-	public Board(int x, int y, char t_board_marker, int numberOfShips) {
+	public Board(int x, int y, char t_board_marker, int numberOfShips, String theName) {
 		this.xSize = 0;
 		this.ySize = 0;
 		this.board_marker = '\0';
@@ -93,6 +96,14 @@ public class Board {
 		for(int i = 0; i < numberOfShips; i++) {
 			theShips[i] = new ship(i);
 		}
+
+		this.hasSunk = new boolean[numberOfShips];
+		for(int i = 0; i < numberOfShips; i++) {
+			this.hasSunk[i] = false;
+		}
+		this.sunkCounter = 0;
+
+		this.name = theName;
 	}
 
 	/**
@@ -161,7 +172,7 @@ public class Board {
 	 * @return Board
 	 */
 	public Board getCopyBoard(Board copy) {
-		copy = new Board(this.xSize, this.ySize, this.board_marker, this.numberOfShips);
+		copy = new Board(this.xSize, this.ySize, this.board_marker, this.numberOfShips, this.name);
 		for (int i = 0; i < this.ySize; i++) {
 			for (int k = 0; k < this.xSize; k++) {
 				copy.addMarker(this.map[i][k], i, k);
@@ -239,7 +250,7 @@ public class Board {
 	 * @param y      Int
 	 */
 	public void addMarker(char marker, int x, int y) {
-		this.map[y][x] = marker;
+		this.map[x][y] = marker;
 	}
 
 	/**
@@ -262,7 +273,7 @@ public class Board {
 	 * @return char
 	 */
 	public char getMarker(int x, int y) {
-		return this.map[y][x];
+		return this.map[x][y];
 	}
 
 	public void setShipCoordinates(int shipNum, int row, int col) {
@@ -274,5 +285,25 @@ public class Board {
 		return numberOfShips;
 	}
 
-	
+	private boolean fleetSunk(ship[] sp, int num){
+		if(sp[num - 1].isSink() == true && num > 0){
+			return fleetSunk(sp, num - 1);
+		} else if (sp[num - 1].isSink() == false && num > 0){
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean fleetHasSunk(){
+		return fleetSunk(theShips, numberOfShips);
+	}
+
+	public boolean isEq(Board playerBoard) {
+		return this.name == playerBoard.name;
+	}
+
+	public String getName(){
+		return name;
+	}
 }

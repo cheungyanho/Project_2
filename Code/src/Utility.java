@@ -10,8 +10,7 @@ design decision. This way it'll be a bit more modular even internally.
 
 public class Utility {
     public static Scanner consoleInput = new Scanner(System.in);
-    private char[] coordinateLetters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
-    private void clearTerminal() {
+    public void clearTerminal() {
         for (int i = 0; i < 50; i++) {
             System.out.println("");
         }
@@ -27,7 +26,7 @@ public class Utility {
      *         message to the console
      *
      */
-    private boolean validateShipNum(int num) {
+    public static boolean validateShipNum(int num) {
       if (num > 5 || num < 1) {
         System.out.println("Please input an int from 1 to 5.");
         return (false);
@@ -41,38 +40,15 @@ public class Utility {
      * @pre: Calling clearTerminal() beforehand is recommended, but not required
      * @post: The menu will be displayed
      *
-     */
-    private void printMenu() {
+     */  
+    public void printMenu() {
+
       System.out.println("Menu:");
       System.out.println("1) Attack!!");
-      System.out.println("2) See your board");//do we need this if the board is printing more often
-      System.out.println("3) Attack history");
-      System.out.println("4) Forfeit the match");
+      //System.out.println("2) See your board");//do we need this if the board is printing more often
+      //System.out.println("2) Attack history");
+      System.out.println("2) Forfeit the match");
       System.out.println("CHOICE:");
-    }
-    /**
-
-    */
-    private int safelyGetIntInput() {
-      boolean invalidInput = true;
-          String input = "";
-          int output = 0;
-          do {
-            input = consoleInput.next();
-            try {
-              output = Integer.parseInt(input);
-              invalidInput = false;
-            } catch (NumberFormatException nfe) {
-              System.out.println("Please input an int.");
-              input = consoleInput.nextLine();
-            }
-
-          } while (invalidInput);
-          return (output);
-    }
-    public class safelyGetCoordinates {
-
-
     }
 
 
@@ -102,4 +78,6 @@ public class Utility {
       getInput();
 
     }
+
+    
 }
