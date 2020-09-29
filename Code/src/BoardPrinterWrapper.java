@@ -66,7 +66,7 @@ public class BoardPrinterWrapper{
     this.indexed = t_indexed;
 
     this.g = t_g;
-    this.ui = new Board(g.getXSize() + this.indexOffset + 2 * this.xOffset, g.getYSize() + 2 * this.indexOffset + this.yOffset, this.board_marker, t_g.getNumberOfShips(), t_g.getName());
+    this.ui = new Board(g.getXSize() + this.indexOffset + 2 * this.xOffset, g.getYSize() + 2 * this.indexOffset + this.yOffset, this.board_marker, g.getNumberOfShips(), g.getName());
 
   }
 

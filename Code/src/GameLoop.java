@@ -4,16 +4,21 @@ import java.util.Scanner;
 
 public class GameLoop {
     private Board player1Board;
-    BoardPrinterWrapper player1Printer;
+    private BoardPrinterWrapper player1Printer;
     private Board player2Board;
-    BoardPrinterWrapper player2Printer;
-    private getUserInput player1UI = new getUserInput(1);
+    private BoardPrinterWrapper player2Printer;
+    private getUserInput player1UI;
     private getUserInput player2UI = new getUserInput(2);
     private Scanner consoleInput = new Scanner(System.in);
     private Utility Tools;
     private safelyGetCoordinates getCoor;
     private int choice = 0;
     private boolean[] playerWon = {false, false};
+
+    public GameLoop() {
+        this.player1UI = new getUserInput(1);
+        this.player2UI = new getUserInput(2);
+    }
 
 
     public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper) {
@@ -29,11 +34,13 @@ public class GameLoop {
         int num2 = 0;
         num1 = player1UI.runInterface(player1Board, consoleInput);
         player1Board = new Board(9, 9, '~', num1, "player1Board");
+        player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
         placeShipLoop(player1Board, player1Printer);
         num2 = player2UI.runInterface(player2Board, consoleInput);
         player2Board = new Board(9, 9, '~', num2, "player1Board");
+        player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
         placeShipLoop(player2Board, player2Printer);
-    }
+    } 
 
     private void Loop(Board playerBoard, Board other, getUserInput UI){
         do {

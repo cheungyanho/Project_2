@@ -278,7 +278,7 @@ public class Board {
 
 	public void setShipCoordinates(int shipNum, int row, int col) {
 		coorpair Pair = new coorpair(row, col);
-		theShips[shipNum - 1].setShipCors(Pair);
+		theShips[shipNum].setShipCors(Pair);
 	}
 
 	public int getNumberOfShips() {
