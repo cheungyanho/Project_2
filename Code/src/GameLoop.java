@@ -8,7 +8,7 @@ public class GameLoop {
     private Board player2Board;
     private BoardPrinterWrapper player2Printer;
     private getUserInput player1UI;
-    private getUserInput player2UI = new getUserInput(2);
+    private getUserInput player2UI;
     private Scanner consoleInput = new Scanner(System.in);
     private Utility Tools;
     private safelyGetCoordinates getCoor;
@@ -19,14 +19,20 @@ public class GameLoop {
         this.player1UI = new getUserInput(1);
         this.player2UI = new getUserInput(2);
         this.getCoor = new safelyGetCoordinates();
+        this.Tools = new Utility();
     }
 
 
     public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper) {
         for(int i = 0; i < playerBoard.getNumberOfShips(); i++) {
-            playerWrapper.print(true);
+            playerWrapper.print(false);
             getCoor.getCoordinates();
-            playerBoard.setShipCoordinates(i, getCoor.getRow(), getCoor.getCol());
+            if(CollisionHandler.check(playerBoard, 's', getCoor.getRow(), getCoor.getCol())){
+                playerBoard.setShipCoordinates(i, getCoor.getRow(), getCoor.getCol());
+            } else {
+                System.out.println("Place the ship elsewhere.");
+            }
+            
         }
     }
 
