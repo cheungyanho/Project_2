@@ -71,12 +71,33 @@ public class Utility {
       System.out.println("How many ships (per person) would you like to play with (1-5)?");
       int numberOfShips = 0;
       do {
-        numberOfShips = safelyGetIntInput();
+        numberOfShips = getUserInput.getUserNumber(consoleInput);
       }while (validateShipNum(numberOfShips) == false);
     }
     public void runUtility(){
       getInput();
 
+    }
+
+    public boolean getHori(String next){
+      
+      boolean hori = false;
+      boolean notValid = true;
+      while(notValid){
+        if (next.contains("H")) {
+          hori = true;
+          notValid = false;
+        } else if (next.contains("V")) {
+          hori = false;
+          notValid = false;
+        } 
+      }
+      return hori;
+    }
+
+    public static void printStart(){
+      System.out.println("Let's play Battleship!");
+      System.out.println("Choose between two player OR choose AI Difficulty:");
     }
 
     
