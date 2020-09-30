@@ -278,7 +278,7 @@ public class Board {
 	}
 
 	public void setShipCoordinates(int shipNum, int row, int col) {
-		coorpair Pair = new coorpair(row, col);
+		String Pair = Integer.toString(row) + Integer.toString(col);
 		theShips[shipNum].setShipCors(Pair);
 	}
 
@@ -309,7 +309,7 @@ public class Board {
 	}
 
 	public boolean hitShipBool(int row, int col){
-		coorpair coordinates = new coorpair(row, col);
+		String coordinates = Integer.toString(row) + Integer.toString(col);
 		for(int i = 0; i < numberOfShips; i++){
 			if(theShips[i].shipHit(coordinates)){
 				lastShipHit = i + 1;
@@ -317,6 +317,10 @@ public class Board {
 			} 
 		}
 		return false;
+	}
+
+	public void setlastShipHit(int num){
+		lastShipHit = num;
 	}
 
 	public int getlastShipHit(){

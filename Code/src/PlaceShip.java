@@ -21,7 +21,7 @@ public class PlaceShip {
     }
     
 
-    private boolean placeRecurse(int rowPlace, int colPlace, int sizePlace) {
+    /*private boolean placeRecurse(int rowPlace, int colPlace, int sizePlace) {
         if(!CollisionHandler.check(board, 's', rowPlace, colPlace)) {
             board.addMarker('s', rowPlace, colPlace);
         }
@@ -31,7 +31,7 @@ public class PlaceShip {
             return placeRecurse(rowPlace, colPlace + 1, sizePlace - 1);
         } 
         return true;
-    }
+    }*/
 
     private boolean placeIterative(int row, int col, int size) {
         if(isHori) {
@@ -67,6 +67,8 @@ public class PlaceShip {
             isHori = dir;
             if(placeIt(row, col, size)){
                 setShipDirection(true);
+            } else {
+                throw new IllegalArgumentException("Error: collision with ship.");
             }
         } catch(IllegalArgumentException iae) {
             Utility.errorMessage(iae, "Could not place ship. Try again.");

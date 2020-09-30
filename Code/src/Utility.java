@@ -85,11 +85,9 @@ public class Utility {
       boolean notValid = true;
       while(notValid){
         if (next.contains("H")) {
-          System.out.println("Hey");
           hori = true;
           notValid = false;
         } else if (next.contains("V")) {
-          System.out.println("Hey but bigger");
           hori = false;
           notValid = false;
         } 

@@ -31,10 +31,9 @@ public class GameLoop {
             System.out.println("Choose where to place your ship.");
             getCoor.getCoordinates();
             System.out.println("Horizontal or vertical? Enter H or V.");
-            System.out.println(getCoor.getRow());
-            System.out.println(getCoor.getCol());
             String next = consoleInput.next();
             boolean hori = Tools.getHori(next);
+            playerBoard.setShipCoordinates(i, getCoor.getRow() - 1, getCoor.getCol());
             placeIt.place(getCoor.getRow() - 1, getCoor.getCol(), i + 1, hori);
             
         }
@@ -67,6 +66,7 @@ public class GameLoop {
                     System.out.println("Please input an int.");
                 }
             } while(choice < 0||choice > 3);
+
             switch(choice) {
                 case 1:
                 switch(playerBoard.getName()){
@@ -91,11 +91,17 @@ public class GameLoop {
         playerboard.print(false);
         System.out.println("Choose where to attack your opponent's board: ");
         getCoor.getCoordinates();
-        if(opponent.hitShipBool(getCoor.getRow() - 1, getCoor.getCol())){
+        if(opponent.getMarker(getCoor.getRow() - 1, getCoor.getCol()) == 's'){
+            Tools.clearTerminal();
             opponent.addMarker('x', getCoor.getRow() - 1, getCoor.getCol());
-            System.out.println("It's a hit on ship of size " + opponent.getlastShipHit() + "!");
+            opboard.print(true);
+            playerboard.print(true);
+            System.out.println("It's a hit!");
         } else {
+            Tools.clearTerminal();
             opponent.addMarker('o', getCoor.getRow() - 1, getCoor.getCol());
+            opboard.print(true);
+            playerboard.print(true);
             System.out.println("It's a miss!");
         }
 
@@ -117,8 +123,9 @@ public class GameLoop {
             Loop(player1Board, player2Board, player1UI);
             System.out.println("Player 2 turn");
             Loop(player2Board, player1Board, player2UI);
-        } while (!playerWon[0] && !playerWon[1])
-            ;
+            playerWon[0] = player1Board.fleetHasSunk();
+            playerWon[1] = player1Board.fleetHasSunk();
+        } while (!playerWon[0] && !playerWon[1]);
         if (playerWon[0]) {
             System.out.println("Congratulations! Player 1 has won.");
         } else if (playerWon[1]) {
