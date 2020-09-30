@@ -16,7 +16,7 @@ public class GameLoop {
     private boolean[] playerWon = {false, false};
     private PlaceShip player1place;
     private PlaceShip player2place; 
-
+    
     public GameLoop() {
         this.player1UI = new getUserInput(1);
         this.player2UI = new getUserInput(2);
@@ -28,9 +28,9 @@ public class GameLoop {
     public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper, PlaceShip placeIt) {
         for(int i = 0; i < playerBoard.getNumberOfShips(); i++) {
             playerWrapper.print(false);
+            System.out.println("Choose where to place your ship.");
             getCoor.getCoordinates();
-            System.out.println("Horizontal or vertical? Enter H or V.");
-            boolean hori = (consoleInput.next() == "h" || consoleInput.next() == "H")&&(consoleInput.next() != "v"||consoleInput.next() != "V");
+            boolean hori = Tools.getHori();
             placeIt.place(getCoor.getRow(), getCoor.getCol(), i + 1, hori);
             
         }
@@ -83,10 +83,11 @@ public class GameLoop {
         Tools.clearTerminal();
         player1Printer.print(false);
         player2Printer.print(false);
+        System.out.println("Choose where to attack your opponent's board: ");
         getCoor.getCoordinates();
-        if(opponent.getMarker(getCoor.getRow(), getCoor.getCol()) == 's'){
+        if(opponent.hitShipBool(getCoor.getRow(), getCoor.getCol())){
             opponent.addMarker('x', getCoor.getRow(), getCoor.getCol());
-            System.out.println("It's a hit!");
+            System.out.println("It's a hit on ship of size " + opponent.getlastShipHit() + "!");
         } else {
             opponent.addMarker('o', getCoor.getRow(), getCoor.getCol());
             System.out.println("It's a miss!");

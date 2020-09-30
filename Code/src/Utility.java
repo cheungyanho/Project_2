@@ -71,12 +71,26 @@ public class Utility {
       System.out.println("How many ships (per person) would you like to play with (1-5)?");
       int numberOfShips = 0;
       do {
-        numberOfShips = safelyGetIntInput();
+        numberOfShips = getUserInput.getUserNumber(consoleInput);
       }while (validateShipNum(numberOfShips) == false);
     }
     public void runUtility(){
       getInput();
 
+    }
+
+    public boolean getHori(){
+      System.out.println("Horizontal or vertical? Enter H or V.");
+      String next = consoleInput.next();
+      boolean hori = false;
+      do {
+        if (next == "h" || next == "H") {
+          hori = true;
+        } else if (next == "v" || next == "V") {
+          hori = false;
+        }
+      } while (next != "v" || next != "V" || next != "H" || next != "h");
+      return hori;
     }
 
     

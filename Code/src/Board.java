@@ -53,6 +53,7 @@ public class Board {
 	boolean[] hasSunk;
 	int sunkCounter; 
 	String name;
+	int lastShipHit = 0;
 
 	/**
 	 * Must have valid dimensions and board marker
@@ -307,8 +308,18 @@ public class Board {
 		return name;
 	}
 
-	public boolean hitShipBool(int row, int col, int num){
+	public boolean hitShipBool(int row, int col){
 		coorpair coordinates = new coorpair(row, col);
-		return theShips[num].shipHit(coordinates);
+		for(int i = 0; i < numberOfShips; i++){
+			if(theShips[i].shipHit(coordinates)){
+				lastShipHit = i + 1;
+				return true;
+			} 
+		}
+		return false;
+	}
+
+	public int getlastShipHit(){
+		return lastShipHit;
 	}
 }

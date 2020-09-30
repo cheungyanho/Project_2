@@ -32,6 +32,10 @@ public class getUserInput {
         return input.nextInt();
     }
 
+    public static int getUserNumber(Scanner input){
+        return input.nextInt();
+    }
+
     public int runInterface(Board ba, Scanner in){
         return askForShipNum(ba, in);
     }

@@ -61,6 +61,7 @@ public class safelyGetCoordinates {
 
     public String getCoordinates() {
         do {
+            
             input = Utility.consoleInput.next();
             if (input.length() < 2||input.length() > 2) {
                 System.out.println("Please input coordinates in the format: A1");
