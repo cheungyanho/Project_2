@@ -83,13 +83,16 @@ public class Utility {
       System.out.println("Horizontal or vertical? Enter H or V.");
       String next = consoleInput.next();
       boolean hori = false;
-      do {
+      boolean notValid = true;
+      while(notValid) {
         if (next == "h" || next == "H") {
           hori = true;
+          notValid = false;
         } else if (next == "v" || next == "V") {
           hori = false;
+          notValid = false;
         }
-      } while (next != "v" || next != "V" || next != "H" || next != "h");
+      }
       return hori;
     }
 
