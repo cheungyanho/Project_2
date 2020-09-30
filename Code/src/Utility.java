@@ -66,7 +66,7 @@ public class Utility {
     }
 
     private void chooseShipNum() {
-      boolean invalidInput = true;
+      //boolean invalidInput = true;
       System.out.println("Welcome to the game of Battleship!");
       System.out.println("How many ships (per person) would you like to play with (1-5)?");
       int numberOfShips = 0;
