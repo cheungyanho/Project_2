@@ -30,21 +30,27 @@ public class GameLoop {
             playerWrapper.print(false);
             System.out.println("Choose where to place your ship.");
             getCoor.getCoordinates();
-            boolean hori = Tools.getHori();
-            placeIt.place(getCoor.getRow(), getCoor.getCol(), i + 1, hori);
+            System.out.println("Horizontal or vertical? Enter H or V.");
+            System.out.println(getCoor.getRow());
+            System.out.println(getCoor.getCol());
+            String next = consoleInput.next();
+            boolean hori = Tools.getHori(next);
+            placeIt.place(getCoor.getRow() - 1, getCoor.getCol(), i + 1, hori);
             
         }
     }
 
     public void Init(){
+        Utility.printStart();
         int num1 = 0;
         int num2 = 0;
+        System.out.println("Player 1 place ships:");
         num1 = player1UI.runInterface(player1Board, consoleInput);
         player1Board = new Board(9, 9, '~', num1, "player1Board");
         player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
         player1place = new PlaceShip(player1Board);
         placeShipLoop(player1Board, player1Printer, player1place);
-
+        System.out.println("Player 2 place ships:");
         num2 = player2UI.runInterface(player2Board, consoleInput);
         player2Board = new Board(9, 9, '~', num2, "player1Board");
         player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
@@ -53,7 +59,6 @@ public class GameLoop {
     } 
 
     private void Loop(Board playerBoard, Board other, getUserInput UI){
-        do {
             Tools.printMenu();
             do {
                 try {
@@ -61,35 +66,36 @@ public class GameLoop {
                 } catch (InputMismatchException ime) {
                     System.out.println("Please input an int.");
                 }
-            } while(choice > 0||choice < 3);
+            } while(choice < 0||choice > 3);
             switch(choice) {
                 case 1:
-                markBoard(other);
+                switch(playerBoard.getName()){
+                    case "player1Board":
+                    markBoard(playerBoard, player2Printer, player1Printer);
+                    break;
+                    case "player2Board":
+                    markBoard(playerBoard, player1Printer, player2Printer);
+                }
                 break;
                 case 2:
                 TakeTheL(playerBoard);
                 break;
             }
 
-        } while(playerWon[0]||playerWon[1]);
-        if(playerWon[0]){
-            System.out.println("Congratulations! Player 1 has won.");
-        } else {
-            System.out.println("Congratulations! Player 2 has won.");
-        }
     }
 
-    private void markBoard(Board opponent){
+    private void markBoard(Board opponent, BoardPrinterWrapper opboard, BoardPrinterWrapper playerboard){
         Tools.clearTerminal();
-        player1Printer.print(false);
-        player2Printer.print(false);
+        opboard.print(true);
+        System.out.println("");
+        playerboard.print(false);
         System.out.println("Choose where to attack your opponent's board: ");
         getCoor.getCoordinates();
-        if(opponent.hitShipBool(getCoor.getRow(), getCoor.getCol())){
-            opponent.addMarker('x', getCoor.getRow(), getCoor.getCol());
+        if(opponent.hitShipBool(getCoor.getRow() - 1, getCoor.getCol())){
+            opponent.addMarker('x', getCoor.getRow() - 1, getCoor.getCol());
             System.out.println("It's a hit on ship of size " + opponent.getlastShipHit() + "!");
         } else {
-            opponent.addMarker('o', getCoor.getRow(), getCoor.getCol());
+            opponent.addMarker('o', getCoor.getRow() - 1, getCoor.getCol());
             System.out.println("It's a miss!");
         }
 
@@ -105,8 +111,19 @@ public class GameLoop {
     }
 
     public void Play(){
-        Loop(player1Board, player2Board, player1UI);
-        Loop(player2Board, player1Board, player2UI);
+        do
+        {
+            System.out.println("Player 1 turn");
+            Loop(player1Board, player2Board, player1UI);
+            System.out.println("Player 2 turn");
+            Loop(player2Board, player1Board, player2UI);
+        } while (!playerWon[0] && !playerWon[1])
+            ;
+        if (playerWon[0]) {
+            System.out.println("Congratulations! Player 1 has won.");
+        } else if (playerWon[1]) {
+            System.out.println("Congratulations! Player 2 has won.");
+        }
     }
 
     public void Game() {

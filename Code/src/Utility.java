@@ -79,21 +79,27 @@ public class Utility {
 
     }
 
-    public boolean getHori(){
-      System.out.println("Horizontal or vertical? Enter H or V.");
-      String next = consoleInput.next();
+    public boolean getHori(String next){
+      
       boolean hori = false;
       boolean notValid = true;
-      while(notValid) {
-        if (next == "h" || next == "H") {
+      while(notValid){
+        if (next.contains("H")) {
+          System.out.println("Hey");
           hori = true;
           notValid = false;
-        } else if (next == "v" || next == "V") {
+        } else if (next.contains("V")) {
+          System.out.println("Hey but bigger");
           hori = false;
           notValid = false;
-        }
+        } 
       }
       return hori;
+    }
+
+    public static void printStart(){
+      System.out.println("Let's play Battleship!");
+      System.out.println("Choose between two player OR choose AI Difficulty:");
     }
 
     

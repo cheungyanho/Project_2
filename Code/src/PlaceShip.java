@@ -32,9 +32,34 @@ public class PlaceShip {
         } 
         return true;
     }
+
+    private boolean placeIterative(int row, int col, int size) {
+        if(isHori) {
+            for (int i = 0; i < size; i++) {
+                if (!CollisionHandler.check(board, 's', row + i, col)) {
+                    board.addMarker('s', row + i, col);
+                } else {
+                    System.out.println("Try a different coordinate");
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (!CollisionHandler.check(board, 's', row, col + i)) {
+                    board.addMarker('s', row, col + i);
+                } else {
+                    System.out.println("Try a different coordinate");
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+    }
     
     private boolean placeIt(int row, int col, int size){
-        return placeRecurse(row, col, size);
+        return placeIterative(row, col, size);
     }
 
     public void place(int row, int col, int size, boolean dir) {
