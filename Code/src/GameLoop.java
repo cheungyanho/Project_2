@@ -14,6 +14,8 @@ public class GameLoop {
     private safelyGetCoordinates getCoor;
     private int choice = 0;
     private boolean[] playerWon = {false, false};
+    private PlaceShip player1place;
+    private PlaceShip player2place; 
 
     public GameLoop() {
         this.player1UI = new getUserInput(1);
@@ -23,15 +25,13 @@ public class GameLoop {
     }
 
 
-    public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper) {
+    public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper, PlaceShip placeIt) {
         for(int i = 0; i < playerBoard.getNumberOfShips(); i++) {
             playerWrapper.print(false);
             getCoor.getCoordinates();
-            if(!CollisionHandler.check(playerBoard, 's', getCoor.getRow(), getCoor.getCol())){
-                playerBoard.setShipCoordinates(i, getCoor.getRow(), getCoor.getCol());
-            } else {
-                System.out.println("Place the ship elsewhere.");
-            }
+            System.out.println("Horizontal or vertical? Enter H or V.");
+            boolean hori = (consoleInput.next() == "h" || consoleInput.next() == "H")&&(consoleInput.next() != "v"||consoleInput.next() != "V");
+            placeIt.place(getCoor.getRow(), getCoor.getCol(), i + 1, hori);
             
         }
     }
@@ -42,11 +42,14 @@ public class GameLoop {
         num1 = player1UI.runInterface(player1Board, consoleInput);
         player1Board = new Board(9, 9, '~', num1, "player1Board");
         player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
-        placeShipLoop(player1Board, player1Printer);
+        player1place = new PlaceShip(player1Board);
+        placeShipLoop(player1Board, player1Printer, player1place);
+
         num2 = player2UI.runInterface(player2Board, consoleInput);
         player2Board = new Board(9, 9, '~', num2, "player1Board");
         player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
-        placeShipLoop(player2Board, player2Printer);
+        player2place = new PlaceShip(player2Board);
+        placeShipLoop(player2Board, player2Printer, player2place);
     } 
 
     private void Loop(Board playerBoard, Board other, getUserInput UI){
@@ -81,11 +84,11 @@ public class GameLoop {
         player1Printer.print(false);
         player2Printer.print(false);
         getCoor.getCoordinates();
-        if(opponent.getMarker(getCoor.getRow() - 1, getCoor.getCol() - 1) == 's'){
-            opponent.addMarker('x', getCoor.getRow() - 1, getCoor.getCol() - 1);
+        if(opponent.getMarker(getCoor.getRow(), getCoor.getCol()) == 's'){
+            opponent.addMarker('x', getCoor.getRow(), getCoor.getCol());
             System.out.println("It's a hit!");
         } else {
-            opponent.addMarker('o', getCoor.getRow() - 1, getCoor.getCol() - 1);
+            opponent.addMarker('o', getCoor.getRow(), getCoor.getCol());
             System.out.println("It's a miss!");
         }
 

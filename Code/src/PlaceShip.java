@@ -4,17 +4,12 @@ public class PlaceShip {
     private Board board;
     private String shipNumber;
     private boolean isHori;
-    private int col;//1-9
-    private int row;//A-I
-    private int size;
     private boolean directionSucceeded;
 
-    public PlaceShip(Board theBoard, int theSize, String shipId, int rowPlace, int colPlace, int numShips){
+    public PlaceShip(Board theBoard){
         this.board = theBoard;
-        this.shipNumber = shipId;
         this.isHori = false;
         this.directionSucceeded = false;
-        this.size = theSize + 1;
         
         
     }
@@ -38,13 +33,14 @@ public class PlaceShip {
         return true;
     }
     
-    private boolean placeIt(){
+    private boolean placeIt(int row, int col, int size){
         return placeRecurse(row, col, size);
     }
 
-    public void place(ship theShip) {
+    public void place(int row, int col, int size, boolean dir) {
         try {
-            if(placeIt()){
+            isHori = dir;
+            if(placeIt(row, col, size)){
                 setShipDirection(true);
             }
         } catch(IllegalArgumentException iae) {

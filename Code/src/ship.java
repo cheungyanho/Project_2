@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class ship {
     private int size;
     private boolean[] shipArray;
-    HashMap<coorpair, Integer> pair = new HashMap<coorpair, Integer>();
+    private HashMap<coorpair, Integer> pair = new HashMap<coorpair, Integer>();
     
     private int counter;
 

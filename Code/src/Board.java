@@ -306,4 +306,9 @@ public class Board {
 	public String getName(){
 		return name;
 	}
+
+	public boolean hitShipBool(int row, int col, int num){
+		coorpair coordinates = new coorpair(row, col);
+		return theShips[num].shipHit(coordinates);
+	}
 }
