@@ -24,23 +24,25 @@ public class GameLoop {
         this.Tools = new Utility();
     }
 
-
-    public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper, PlaceShip placeIt) {
-        for(int i = 0; i < playerBoard.getNumberOfShips(); i++) {
-            playerWrapper.print(false);
-            System.out.println("Choose where to place your ship.");
-            getCoor.getCoordinates();
-            System.out.println("Horizontal or vertical? Enter H or V.");
-            String next = consoleInput.next();
-            boolean hori = Tools.getHori(next);
-            playerBoard.setShipCoordinates(i, getCoor.getRow() - 1, getCoor.getCol());
-            placeIt.place(getCoor.getRow() - 1, getCoor.getCol(), i + 1, hori);
-            
-        }
-    }
-
-    public void Init(){
+    public gameLogicInterface Init(){
         Utility.printStart();
+        AIEasy Easy = new AIEasy();
+        AIMedium Medium = new AIMedium();
+        AIHard Hard = new AIHard();
+        System.out.println("Type 1 for player, 2 for AI");
+        int AI = consoleInput.nextInt();
+        boolean isNotAI = false;
+        String yourChoice = "";
+        switch(AI){
+            case 1:
+            isNotAI = true;
+            break;
+            case 2:
+            isNotAI = false;
+            System.out.println("Type easy, medium, or hard.");
+            yourChoice = consoleInput.next();
+        }
+        
         int num1 = 0;
         int num2 = 0;
         System.out.println("Player 1 place ships:");
@@ -48,16 +50,72 @@ public class GameLoop {
         player1Board = new Board(9, 9, '~', num1, "player1Board");
         player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
         player1place = new PlaceShip(player1Board);
-        placeShipLoop(player1Board, player1Printer, player1place);
-        System.out.println("Player 2 place ships:");
-        num2 = player2UI.runInterface(player2Board, consoleInput);
-        player2Board = new Board(9, 9, '~', num2, "player1Board");
-        player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
-        player2place = new PlaceShip(player2Board);
-        placeShipLoop(player2Board, player2Printer, player2place);
+        getCoor.placeShipLoop(player1Board, player1Printer, player1place);
+        if(isNotAI){
+            System.out.println("Player 2 place ships:");
+            num2 = player2UI.runInterface(player2Board, consoleInput);
+            player2Board = new Board(9, 9, '~', num2, "player1Board");
+            player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
+            player2place = new PlaceShip(player2Board);
+            getCoor.placeShipLoop(player2Board, player2Printer, player2place);
+        } else {
+            switch(yourChoice){
+                case "easy":
+                Easy.placeShipLoop(player2Board, player2Printer, player2place);
+                return Easy;
+                case "medium":
+                Medium.placeShipLoop(player2Board, player2Printer, player2place);
+                return Medium;
+                case "hard":
+                Hard.placeShipLoop(player2Board, player2Printer, player2place);
+                return Hard;
+            }
+        } return getCoor;
+        
     } 
 
-    private void Loop(Board playerBoard, Board other, getUserInput UI){
+    
+
+    public void Play(gameLogicInterface getCoorP, gameLogicInterface getCoorO){
+        do
+        {
+            System.out.println("Player 1 turn");
+            if(!getCoorP.Loop(player1Board, player2Board, player1UI, player1Printer, player2Printer)){
+                break;//for forfeit
+            }
+            System.out.println("Player 2 turn");
+            if (!getCoorO.Loop(player1Board, player2Board, player1UI, player1Printer, player2Printer)) {
+                break;
+            }
+            playerWon[0] = player1Board.fleetHasSunk();
+            playerWon[1] = player1Board.fleetHasSunk();
+        } while (!playerWon[0] && !playerWon[1]);
+        if (playerWon[0]) {
+            System.out.println("Congratulations! Player 1 has won.");
+        } else if (playerWon[1]) {
+            System.out.println("Congratulations! Player 2 has won.");
+        }
+    }
+
+    public void Game() {
+        Play(getCoor, Init());
+    }
+
+    /*public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper, PlaceShip placeIt) {
+        for(int i = 0; i < playerBoard.getNumberOfShips(); i++) {
+            playerWrapper.print(false);
+            System.out.println("Choose where to place your ship.");
+            getCoordinates();
+            System.out.println("Horizontal or vertical? Enter H or V.");
+            String next = consoleInput.next();
+            boolean hori = Tools.getHori(next);
+            playerBoard.setShipCoordinates(i, getCoor.getRow() - 1, getCoor.getCol());
+            placeIt.place(getCoor.getRow() - 1, getCoor.getCol(), i + 1, hori);
+            
+        }
+    }*/
+
+    /*private void Loop(Board playerBoard, Board other, getUserInput UI){
             Tools.printMenu();
             do {
                 try {
@@ -106,36 +164,16 @@ public class GameLoop {
         }
 
 
-    }
+    }*/
 
-    private void TakeTheL(Board playerBoard){
+    /*private void TakeTheL(Board playerBoard){
         if(playerBoard.isEq(player1Board)) {
             playerWon[1] = true;
         } else {
             playerWon[0] = true;
         }
-    }
+    }*/
 
-    public void Play(){
-        do
-        {
-            System.out.println("Player 1 turn");
-            Loop(player1Board, player2Board, player1UI);
-            System.out.println("Player 2 turn");
-            Loop(player2Board, player1Board, player2UI);
-            playerWon[0] = player1Board.fleetHasSunk();
-            playerWon[1] = player1Board.fleetHasSunk();
-        } while (!playerWon[0] && !playerWon[1]);
-        if (playerWon[0]) {
-            System.out.println("Congratulations! Player 1 has won.");
-        } else if (playerWon[1]) {
-            System.out.println("Congratulations! Player 2 has won.");
-        }
-    }
 
-    public void Game() {
-        Init();
-        Play();
-    }
 
 }

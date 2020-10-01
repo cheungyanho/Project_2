@@ -10,7 +10,7 @@ design decision. This way it'll be a bit more modular even internally.
 
 public class Utility {
     public static Scanner consoleInput = new Scanner(System.in);
-    public void clearTerminal() {
+    public static void clearTerminal() {
         for (int i = 0; i < 50; i++) {
             System.out.println("");
         }
@@ -41,7 +41,7 @@ public class Utility {
      * @post: The menu will be displayed
      *
      */  
-    public void printMenu() {
+    public static void printMenu() {
 
       System.out.println("Menu:");
       System.out.println("1) Attack!!");
@@ -58,10 +58,9 @@ public class Utility {
     }
 
 
-    private void getInput() {
+    private void getInput(safelyGetCoordinates input) {
         //input.getCoordinates();
         chooseShipNum();
-        safelyGetCoordinates input = new safelyGetCoordinates();
         input.getCoordinates();
     }
 
@@ -74,12 +73,12 @@ public class Utility {
         numberOfShips = getUserInput.getUserNumber(consoleInput);
       }while (validateShipNum(numberOfShips) == false);
     }
-    public void runUtility(){
-      getInput();
+    public void runUtility(safelyGetCoordinates input){
+      getInput(input);
 
     }
 
-    public boolean getHori(String next){
+    public static boolean getHori(String next){
       
       boolean hori = false;
       boolean notValid = true;

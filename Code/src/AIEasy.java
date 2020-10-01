@@ -1,12 +1,14 @@
 public class AIEasy implements gameLogicInterface {
     private int row;
     private int col;
-    public void getCoordinates(){
-
+    
+    public String getCoordinates() {
+        return "nothing";
     }
 
-    public void Loop(Board board1, Board board2, BoardPrinterWrapper UI){
-
+    public boolean Loop(Board playerBoard, Board other, getUserInput UI, BoardPrinterWrapper player1Printer,
+            BoardPrinterWrapper player2Printer){
+                return true;
     }
 
     public void markBoard(Board opponent, BoardPrinterWrapper opboard, BoardPrinterWrapper playerboard){
@@ -20,4 +22,8 @@ public class AIEasy implements gameLogicInterface {
     public int getCol(){
         return col;
     }  
+
+    public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper, PlaceShip placeIt){
+
+    }
 }
