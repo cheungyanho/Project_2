@@ -27,6 +27,10 @@ public class AIMedium implements gameLogicInterface{
     private void unMark(int row, int col){
         BoardCopy.addMarker('o', row, col);
     }
+
+    private void unMarkCopy(int row, int col) {
+        BoardCopy.addMarker('v', row, col);
+    }
     
     private boolean markRandom(int size) {
         row = rand.nextInt(size);
@@ -96,15 +100,19 @@ public class AIMedium implements gameLogicInterface{
     private boolean backTrack(int row, int col){
         if(checkUp(row, col, 'x')){
             this.row--;
+            unMarkCopy(row - 1, col);
             return true;
         } else if (checkDown(row, col, 'x')){
             this.row++;
+            unMarkCopy(row + 1, col);
             return true;
         } else if (checkLeft(row, col, 'x')){
             this.col--;
+            unMarkCopy(row, col - 1);
             return true;
         } else if (checkRight(row, col, 'x')){
             this.col++;
+            unMarkCopy(row, col + 1);
             return true;
         } return false;
 
