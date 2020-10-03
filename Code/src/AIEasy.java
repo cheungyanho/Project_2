@@ -24,6 +24,6 @@ public class AIEasy implements gameLogicInterface {
     }  
 
     public void placeShipLoop(Board playerBoard, BoardPrinterWrapper playerWrapper, PlaceShip placeIt){
-
+        PlaceAIShips.placeAI(playerBoard, playerWrapper, placeIt);
     }
 }

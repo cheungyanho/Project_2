@@ -7,7 +7,6 @@ public class safelyGetCoordinates implements gameLogicInterface{
     private String output = "";
     private boolean colValid = false;
     private boolean rowValid = false;
-    private int numLoc = 0;
     private char col = 'z';
     private char row = 'z';
     private int column;
