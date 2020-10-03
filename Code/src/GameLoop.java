@@ -60,6 +60,8 @@ public class GameLoop {
             player2place = new PlaceShip(player2Board);
             getCoor.placeShipLoop(player2Board, player2Printer, player2place);
         } else {
+            player2Board = new Board(9, 9, '~', num2, "player1Board");
+            player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
             switch(yourChoice){
                 case "easy":
                 Easy.placeShipLoop(player2Board, player2Printer, player2place);
