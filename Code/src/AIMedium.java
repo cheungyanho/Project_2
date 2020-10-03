@@ -128,7 +128,7 @@ public class AIMedium implements gameLogicInterface{
             choice = 10000;
         }
         else {
-            rand.nextInt(10000);
+            choice = rand.nextInt(10000);
         }
         if(choice < 9999){
             markBoard(other, player2Printer, player1Printer);
