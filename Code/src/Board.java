@@ -288,10 +288,14 @@ public class Board {
 	}
 
 	private boolean fleetSunk(ship[] sp, int num){
-		if(sp[num - 1].isSink() == true && num > 0){
-			return fleetSunk(sp, num - 1);
-		} else if (sp[num - 1].isSink() == false && num > 0){
+		if(num > 0){
+			if(sp[num - 1].isSink() == true){
+				return fleetSunk(sp, num - 1);
+			} else if (sp[num - 1].isSink() == false && num > 0){
 			return false;
+			} else {
+				return true;
+			}
 		} else {
 			return true;
 		}

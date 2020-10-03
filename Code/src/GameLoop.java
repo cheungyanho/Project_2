@@ -26,7 +26,7 @@ public class GameLoop {
 
     public gameLogicInterface Init(){
         Utility.printStart();
-        AIEasy Easy = new AIEasy();
+        AIEasy Easy;
         AIMedium Medium;
         AIHard Hard = new AIHard();
         System.out.println("Type 1 for player, 2 for AI");
@@ -64,6 +64,7 @@ public class GameLoop {
             player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
             switch(yourChoice){
                 case "easy":
+                Easy = new AIEasy(player2Board);
                 Easy.placeShipLoop(player2Board, player2Printer, player2place);
                 return Easy;
                 case "medium":
