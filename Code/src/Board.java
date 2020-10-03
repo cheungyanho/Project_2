@@ -54,6 +54,7 @@ public class Board {
 	int sunkCounter; 
 	String name;
 	int lastShipHit = 0;
+	
 
 	/**
 	 * Must have valid dimensions and board marker
