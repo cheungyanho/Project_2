@@ -62,17 +62,17 @@ public class PlaceShip {
         return placeIterative(row, col, size);
     }
 
-    public void place(int row, int col, int size, boolean dir) {
+    public boolean place(int row, int col, int size, boolean dir) {
         try {
             isHori = dir;
             if(placeIt(row, col, size)){
-                setShipDirection(true);
+                return setShipDirection(true);
             } else {
                 throw new IllegalArgumentException("Error: collision with ship.");
             }
         } catch(IllegalArgumentException iae) {
             Utility.errorMessage(iae, "Could not place ship. Try again.");
-            setShipDirection(false);
+            return setShipDirection(false);
         }
     }
 
