@@ -84,7 +84,7 @@ public class safelyGetCoordinates implements gameLogicInterface{
     public boolean Loop(Board playerBoard, Board other, getUserInput UI, BoardPrinterWrapper player1Printer, 
         BoardPrinterWrapper player2Printer) {
         Utility.printMenu();
-        broken1.fillMap();
+        
         int choice = 0;
         do {
             try {
@@ -135,13 +135,13 @@ public class safelyGetCoordinates implements gameLogicInterface{
             System.out.println("It's a hit!");
             switch(opponent.getName()){
                 case "player1Board":
-                    broken2.removeByCoordinate(broken2.convertCoor(getRow() - 1, getCol()));
+                    broken2.removeByCoordinate(input);
                 break;
                 case "player2Board":
-                    broken1.removeByCoordinate(broken1.convertCoor(getRow() - 1, getCol()));
+                    broken1.removeByCoordinate(input);
                 break;
                 default:
-                    broken1.removeByCoordinate(broken1.convertCoor(getRow() - 1, getCol()));
+                    broken1.removeByCoordinate(input);
             }
         } else {
             //Utility.clearTerminal();
@@ -161,19 +161,21 @@ public class safelyGetCoordinates implements gameLogicInterface{
             System.out.println("Horizontal or vertical? Enter H or V.");
             String next = Utility.consoleInput.next();
             boolean hori = Utility.getHori(next);
-            placeIt.place(getRow() - 1, getCol(), i + 1, hori);
-            
-            
+            placeIt.place(getRow() - 1, getCol(), i + 1, hori);  
 
         }
+        
     }
 
     public void setRadar(Board p1board, Board p2board){
         broken1 = new BrokenRadar(p2board);
         broken2 = new BrokenRadar(p1board);
+        broken1.fillMap();
+        broken2.fillMap();
     }
 
     public void setRadar(Board opponent){
         broken1 = new BrokenRadar(opponent);
+        broken1.fillMap();
     }//overload if AI
 }

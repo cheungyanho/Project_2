@@ -27,7 +27,7 @@ public class BrokenRadar {
     } 
 
     public String convertCoor(int row, int col){
-        return Integer.toString(col) + coordinateLetters[row];
+        return coordinateLetters[col] + Integer.toString(row);
     }
 
     public void fillMap(){
@@ -45,10 +45,10 @@ public class BrokenRadar {
             }
             
             for (int j = s; j < s + i; j++) {
-                System.out.println(j);
+                //System.out.println(j);
                 trueCombo.put(j, set[j - s]);
                 trueComboReverse.put(set[j - s], j);
-                System.out.println(trueCombo.get(j));
+                //System.out.println(trueCombo.get(j));
             }
             
         }
