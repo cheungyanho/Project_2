@@ -60,6 +60,7 @@ public class BrokenRadar {
         do {
             if (trueCombo.containsKey(randomLoc)){
                 Coordinates.push(trueCombo.get(randomLoc));
+                removeFromList(randomLoc);
                 check = false;
             } else {
                 randomLoc = rand.nextInt(size);
