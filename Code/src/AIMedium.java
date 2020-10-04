@@ -8,7 +8,7 @@ public class AIMedium implements gameLogicInterface{
     Random rand = new Random();//RNG for placing ships and for firing initially
 
     AIMedium(Board orig){
-        this.BoardCopy = orig.getCopyBoard(orig);
+        this.BoardCopy = orig.getCopyBoard(BoardCopy);
         this.BoardOrig = orig;
     }
 

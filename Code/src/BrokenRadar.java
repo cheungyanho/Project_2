@@ -18,6 +18,7 @@ public class BrokenRadar {
 
     public BrokenRadar(Board opponent){
         int temp = opponent.getNumberOfShips();
+        System.out.println(temp);
         this.numRows = opponent.getXSize();
         this.numCols = opponent.getYSize();
         this.numberOfShips = temp;
@@ -29,9 +30,9 @@ public class BrokenRadar {
         return Integer.toString(col) + coordinateLetters[row];
     }
 
-    private void fillMap(){
+    public void fillMap(){
         for(int i = 0; i < numberOfShips; i++){
-            String[] set = new String[i];
+            String[] set = new String[i + 1];
             if(i < numberOfShips)
             {
                 for(int j = 0; j < numberOfShips; j++){
@@ -43,6 +44,7 @@ public class BrokenRadar {
             for (int j = s; j < s + i; j++) {
                 trueCombo.put(j, set[j - s]);
                 trueComboReverse.put(set[j - s], j);
+                System.out.println(trueCombo.get(j));
             }
             
         }
@@ -95,14 +97,12 @@ public class BrokenRadar {
     }
 
     private boolean findCoordinates(){
-        if(trueCombo.isEmpty()){
-            return false;
-        } else {
-            getRealCoordinate();
-            getRealCoordinate();
-            getRandomCoordinate();
-            return true;
-        }
+        
+        getRealCoordinate();
+        getRealCoordinate();
+        getRandomCoordinate();
+        return true;
+        
         
     }
 
@@ -115,13 +115,8 @@ public class BrokenRadar {
     }
 
     private void setBroken(){
-        if(!Coordinates.isEmpty()){
-            emptyList();
-        }
-        else {
-            findCoordinates();
-            shuffleList();
-        }
+        findCoordinates();
+        shuffleList();
     }
 
     private void printList(){
@@ -131,12 +126,9 @@ public class BrokenRadar {
     }
 
     public void runRadar(){
-        if(Coordinates.isEmpty())
-        {
-            fillMap();
-        }
         setBroken();
         printList();
+        emptyList();
     }
   
 

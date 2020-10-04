@@ -1,15 +1,18 @@
 import java.util.Random;
 
 public class PlaceAIShips {
-    public static void placeAI(Board playerBoard, BoardPrinterWrapper playerWrapper,
-    PlaceShip placeIt) {
-        Random rand = new Random();
-        int numShips = 1;
-        int placementRow;
-        int placementCol;
+    public static int numShips = 1;
+    private static Random rand = new Random();
+    public static int determineShips(){
         do {
             numShips = rand.nextInt(6);
         } while (numShips == 0);
+        return numShips;
+    }
+    public static void placeAI(Board playerBoard, BoardPrinterWrapper playerWrapper,
+    PlaceShip placeIt) {
+        int placementRow;
+        int placementCol;
         //playerBoard = new Board(9, 9, '~', numShips, "player1Board");
         //playerWrapper = new BoardPrinterWrapper(playerBoard, 's', '~', true);
         placeIt = new PlaceShip(playerBoard);

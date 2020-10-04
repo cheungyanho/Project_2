@@ -47,8 +47,6 @@ public class GameLoop {
         player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
         player1place = new PlaceShip(player1Board);
         getCoor.placeShipLoop(player1Board, player1Printer, player1place);
-        player2Board = new Board(9, 9, '~', num2, "player2Board");
-        player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
         
 
         if(isNotAI){
@@ -57,7 +55,12 @@ public class GameLoop {
             player2place = new PlaceShip(player2Board);
             getCoor.placeShipLoop(player2Board, player2Printer, player2place);
             getCoor.setRadar(player1Board, player2Board);
+            player2Board = new Board(9, 9, '~', num2, "player2Board");
+            player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
         } else {
+            num2 = PlaceAIShips.determineShips();
+            player2Board = new Board(9, 9, '~', num2, "player2Board");
+            player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
             switch(yourChoice){
                 case "easy":
                 Easy = new AIEasy(player2Board);

@@ -82,8 +82,9 @@ public class safelyGetCoordinates implements gameLogicInterface{
     }
 
     public boolean Loop(Board playerBoard, Board other, getUserInput UI, BoardPrinterWrapper player1Printer, 
-            BoardPrinterWrapper player2Printer) {
+        BoardPrinterWrapper player2Printer) {
         Utility.printMenu();
+        broken1.fillMap();
         int choice = 0;
         do {
             try {
