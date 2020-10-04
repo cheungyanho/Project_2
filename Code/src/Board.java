@@ -279,9 +279,13 @@ public class Board {
 		return this.map[x][y];
 	}
 
-	public void setShipCoordinates(int shipNum, int row, int col) {
-		String Pair = coordinateLetters[col] + Integer.toString(row);
-		theShips[shipNum].setShipCors(Pair);
+	public void setShipCoordinates(int shipNum, int row, int col, int location) {
+		String Pair = "";
+		//String[] PairArray = new String[shipNum];
+		Pair = coordinateLetters[col] + Integer.toString(row);
+		theShips[shipNum].setShipCors(Pair, location);
+
+		
 	}
 
 	public int getNumberOfShips() {

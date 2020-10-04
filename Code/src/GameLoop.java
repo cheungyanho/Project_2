@@ -83,15 +83,15 @@ public class GameLoop {
 
     
 
-    public void Play(gameLogicInterface getCoorP, gameLogicInterface getCoorO){
+    public void Play(gameLogicInterface getCoorPlayer, gameLogicInterface getCoorOpponent){
         do
         {
             System.out.println("Player 1 turn");
-            if(!getCoorP.Loop(player1Board, player2Board, player1UI, player1Printer, player2Printer)){
+            if(!getCoorPlayer.Loop(player1Board, player2Board, player1UI, player1Printer, player2Printer)){
                 break;//for forfeit
             }
             System.out.println("Player 2 turn");
-            if (!getCoorO.Loop(player1Board, player2Board, player1UI, player1Printer, player2Printer)) {
+            if (!getCoorOpponent.Loop(player2Board, player1Board, player1UI, player1Printer, player2Printer)) {
                 break;
             }
             playerWon[0] = player1Board.fleetHasSunk();

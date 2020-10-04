@@ -98,10 +98,10 @@ public class safelyGetCoordinates implements gameLogicInterface{
             case 1:
                 switch (playerBoard.getName()) {
                     case "player1Board":
-                        markBoard(playerBoard, player2Printer, player1Printer);
+                        markBoard(other, player2Printer, player1Printer);
                         break;
                     case "player2Board":
-                        markBoard(playerBoard, player1Printer, player2Printer);
+                        markBoard(other, player1Printer, player2Printer);
                 } return true;
             case 2:
                 switch (playerBoard.getName()) {
@@ -111,6 +111,8 @@ public class safelyGetCoordinates implements gameLogicInterface{
                     case "player2Board":
                         broken2.runRadar();
                         break;
+                    default: 
+                        broken1.runRadar();
                 } return true;
             case 3:
                 return false;
@@ -119,17 +121,17 @@ public class safelyGetCoordinates implements gameLogicInterface{
     }
 
     public void markBoard(Board opponent, BoardPrinterWrapper opboard, BoardPrinterWrapper playerboard) {
-        Utility.clearTerminal();
-        opboard.print(true);
+        //Utility.clearTerminal();
+        opboard.print(false);
         System.out.println("");
         playerboard.print(false);
         System.out.println("Choose where to attack your opponent's board: ");
         getCoordinates();
         if (opponent.getMarker(getRow() - 1, getCol()) == 's') {
-            Utility.clearTerminal();
+            //Utility.clearTerminal();
             opponent.addMarker('x', getRow() - 1, getCol());
-            opboard.print(true);
-            playerboard.print(true);
+            opboard.print(false);
+            playerboard.print(false);
             System.out.println("It's a hit!");
             switch(opponent.getName()){
                 case "player1Board":
@@ -142,7 +144,7 @@ public class safelyGetCoordinates implements gameLogicInterface{
                     broken1.removeByCoordinate(broken1.convertCoor(getRow() - 1, getCol()));
             }
         } else {
-            Utility.clearTerminal();
+            //Utility.clearTerminal();
             opponent.addMarker('o', getRow() - 1, getCol());
             opboard.print(true);
             playerboard.print(true);
@@ -159,8 +161,9 @@ public class safelyGetCoordinates implements gameLogicInterface{
             System.out.println("Horizontal or vertical? Enter H or V.");
             String next = Utility.consoleInput.next();
             boolean hori = Utility.getHori(next);
-            playerBoard.setShipCoordinates(i, getRow() - 1, getCol());
             placeIt.place(getRow() - 1, getCol(), i + 1, hori);
+            
+            
 
         }
     }

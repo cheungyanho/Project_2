@@ -12,7 +12,7 @@ public class ship {
 
     public ship(int size) {
         this.size = size;
-        shipArray = new boolean[5];
+        shipArray = new boolean[size];
         for(int i = 0; i < size; i++) {
             shipArray[i] = false;
         }
@@ -59,11 +59,11 @@ public class ship {
         return shipSunkRecursive(shipArray, size);
     }
 
-    public void setShipCors(String coordinates) {
-        for(int i = 0; i < size; i++) {
-            pair.put(coordinates, i);
-            reversePair.put(i, coordinates);
-        }
+    public void setShipCors(String coordinates, int location) {
+        
+        pair.put(coordinates, location);
+        reversePair.put(location, coordinates);
+        
     }
 
     public String getShipLoc(int location){

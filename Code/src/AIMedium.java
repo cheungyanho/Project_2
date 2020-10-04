@@ -126,8 +126,7 @@ public class AIMedium implements gameLogicInterface{
         int choice = 0;
         if(playerBoard.fleetHasSunk()){
             choice = 10000;
-        }
-        else {
+        } else {
             choice = rand.nextInt(10000);
         }
         if(choice < 9999){
@@ -159,8 +158,8 @@ public class AIMedium implements gameLogicInterface{
 
             }
         }
-        opboard.print(true);
-        playerboard.print(true);
+        opboard.print(false);
+        playerboard.print(false);
         
     }
 

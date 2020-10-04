@@ -31,17 +31,21 @@ public class BrokenRadar {
     }
 
     public void fillMap(){
+        String[] set;
         for(int i = 0; i < numberOfShips; i++){
-            String[] set = new String[i + 1];
-            if(i < numberOfShips)
-            {
-                for(int j = 0; j < numberOfShips; j++){
-                    set[j] = shipArray[i].getShipLoc(j);
-
-                }
+            set = new String[i + 1];
+            for(int j = 0; j < i + 1; j++){
+                set[j] = shipArray[i].getShipLoc(j);
+                System.out.println("in original array" + set[j]);
             }
-            int s = i * (i + 1)/2;
+            
+            int s = 0;
+            if(i != 0){
+                s = i * (i + 1)/2;
+            }
+            
             for (int j = s; j < s + i; j++) {
+                System.out.println(j);
                 trueCombo.put(j, set[j - s]);
                 trueComboReverse.put(set[j - s], j);
                 System.out.println(trueCombo.get(j));
