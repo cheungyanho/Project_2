@@ -1,6 +1,4 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
-//import java.lang.IllegalArgumentException;
 
 public class GameLoop {
     private Board player1Board;
@@ -10,18 +8,16 @@ public class GameLoop {
     private getUserInput player1UI;
     private getUserInput player2UI;
     private Scanner consoleInput = new Scanner(System.in);
-    private Utility Tools;
     private safelyGetCoordinates getCoor;
-    private int choice = 0;
     private boolean[] playerWon = {false, false};
     private PlaceShip player1place;
     private PlaceShip player2place; 
+    
     
     public GameLoop() {
         this.player1UI = new getUserInput(1);
         this.player2UI = new getUserInput(2);
         this.getCoor = new safelyGetCoordinates();
-        this.Tools = new Utility();
     }
 
     public gameLogicInterface Init(){
@@ -51,28 +47,31 @@ public class GameLoop {
         player1Printer = new BoardPrinterWrapper(player1Board, 's', '~', true);
         player1place = new PlaceShip(player1Board);
         getCoor.placeShipLoop(player1Board, player1Printer, player1place);
+        player2Board = new Board(9, 9, '~', num2, "player2Board");
+        player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
+        
 
         if(isNotAI){
             System.out.println("Player 2 place ships:");
             num2 = player2UI.runInterface(player2Board, consoleInput);
-            player2Board = new Board(9, 9, '~', num2, "player1Board");
-            player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
             player2place = new PlaceShip(player2Board);
             getCoor.placeShipLoop(player2Board, player2Printer, player2place);
+            getCoor.setRadar(player1Board, player2Board);
         } else {
-            player2Board = new Board(9, 9, '~', num2, "player1Board");
-            player2Printer = new BoardPrinterWrapper(player2Board, 's', '~', true);
             switch(yourChoice){
                 case "easy":
                 Easy = new AIEasy(player2Board);
                 Easy.placeShipLoop(player2Board, player2Printer, player2place);
+                getCoor.setRadar(player2Board);
                 return Easy;
                 case "medium":
                 Medium = new AIMedium(player1Board);
                 Medium.placeShipLoop(player2Board, player2Printer, player2place);
+                getCoor.setRadar(player2Board);
                 return Medium;
                 case "hard":
                 Hard.placeShipLoop(player2Board, player2Printer, player2place);
+                getCoor.setRadar(player2Board);
                 return Hard;
             }
         } return getCoor;

@@ -54,6 +54,7 @@ public class Board {
 	int sunkCounter; 
 	String name;
 	int lastShipHit = 0;
+	private char[] coordinateLetters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' };
 	
 
 	/**
@@ -279,7 +280,7 @@ public class Board {
 	}
 
 	public void setShipCoordinates(int shipNum, int row, int col) {
-		String Pair = Integer.toString(row) + Integer.toString(col);
+		String Pair = coordinateLetters[col] + Integer.toString(row);
 		theShips[shipNum].setShipCors(Pair);
 	}
 
@@ -330,5 +331,9 @@ public class Board {
 
 	public int getlastShipHit(){
 		return lastShipHit;
+	}
+
+	public ship[] getShipArray(){
+		return theShips;
 	}
 }

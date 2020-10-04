@@ -11,6 +11,8 @@ public class safelyGetCoordinates implements gameLogicInterface{
     private char row = 'z';
     private int column;
     private int rowboat;
+    private BrokenRadar broken1;
+    private BrokenRadar broken2;
 
     safelyGetCoordinates(){
         this.column = 0;
@@ -142,4 +144,13 @@ public class safelyGetCoordinates implements gameLogicInterface{
 
         }
     }
+
+    public void setRadar(Board p1board, Board p2board){
+        broken1 = new BrokenRadar(p2board);
+        broken2 = new BrokenRadar(p1board);
+    }
+
+    public void setRadar(Board opponent){
+        broken1 = new BrokenRadar(opponent);
+    }//overload if AI
 }

@@ -7,7 +7,7 @@ public class ship {
     private int size;
     private boolean[] shipArray;
     private HashMap<String, Integer> pair = new HashMap<String, Integer>();
-    
+    private HashMap<Integer, String> reversePair = new HashMap<Integer, String>();
     private int counter;
 
     public ship(int size) {
@@ -62,6 +62,11 @@ public class ship {
     public void setShipCors(String coordinates) {
         for(int i = 0; i < size; i++) {
             pair.put(coordinates, i);
+            reversePair.put(i, coordinates);
         }
+    }
+
+    public String getShipLoc(int location){
+        return reversePair.get(location);
     }
 }
