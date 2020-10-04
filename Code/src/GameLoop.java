@@ -94,7 +94,7 @@ public class GameLoop {
             if (!getCoorOpponent.Loop(player2Board, player1Board, player1UI, player1Printer, player2Printer)) {
                 break;
             }
-            playerWon[0] = player1Board.fleetHasSunk();
+            playerWon[0] = player2Board.fleetHasSunk();
             playerWon[1] = player1Board.fleetHasSunk();
         } while (!playerWon[0] && !playerWon[1]);
         if (playerWon[0]) {

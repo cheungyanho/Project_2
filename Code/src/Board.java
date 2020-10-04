@@ -294,9 +294,9 @@ public class Board {
 
 	private boolean fleetSunk(ship[] sp, int num){
 		if(num > 0){
-			if(sp[num].isSink() == true){
+			if(sp[num - 1].isSink() == true){
 				return fleetSunk(sp, num - 1);
-			} else if (sp[num].isSink() == false && num > 0){
+			} else if (sp[num - 1].isSink() == false && num > 0){
 			return false;
 			} else {
 				return true;
@@ -318,8 +318,8 @@ public class Board {
 		return name;
 	}
 
-	public boolean hitShipBool(int row, int col){
-		String coordinates = Integer.toString(row) + Integer.toString(col);
+	public boolean hitShipBool(String coordinates){
+		//String coordinates = Integer.toString(row) + Integer.toString(col);
 		for(int i = 0; i < numberOfShips; i++){
 			if(theShips[i].shipHit(coordinates)){
 				lastShipHit = i + 1;

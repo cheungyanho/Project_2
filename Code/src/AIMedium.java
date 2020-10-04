@@ -6,10 +6,12 @@ public class AIMedium implements gameLogicInterface{
     private Board BoardCopy;//this is going to keep track what's been visited
     private Board BoardOrig;//the actual board pointer
     Random rand = new Random();//RNG for placing ships and for firing initially
+    private BrokenRadar broken; //= new BrokenRadar(BoardOrig);
 
     AIMedium(Board orig){
         this.BoardCopy = orig.getCopyBoard(BoardCopy);
         this.BoardOrig = orig;
+        broken = new BrokenRadar(BoardOrig);
     }
 
     private void markHit(int row, int col){
@@ -20,6 +22,7 @@ public class AIMedium implements gameLogicInterface{
 
     private void markOrig(int row, int col){
         BoardOrig.addMarker('x', row, col);
+        BoardOrig.hitShipBool(broken.convertCoor(row, col));
     }
     private void markMiss(int row, int col) {
         BoardOrig.addMarker('o', row, col);

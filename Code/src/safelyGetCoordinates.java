@@ -137,6 +137,7 @@ public class safelyGetCoordinates implements gameLogicInterface{
             opboard.print(false);
             playerboard.print(false);
             System.out.println("It's a hit!");
+            opponent.hitShipBool(input);
             switch(opponent.getName()){
                 case "player1Board":
                     broken2.removeByCoordinate(input);
