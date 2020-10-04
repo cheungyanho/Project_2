@@ -45,7 +45,7 @@ public class AIMedium implements gameLogicInterface{
         do {
             row = rand.nextInt(size);
             col = rand.nextInt(size);
-        } while(!origHit(row, col, 'o'));
+        } while(origHit(row, col, 'o'));
         return isHit(row, col, 's');
     }
 
@@ -58,6 +58,9 @@ public class AIMedium implements gameLogicInterface{
     }
 
     private boolean isHit(int row, int col, char letter) {
+        if (row < 0 || col < 0 || row > x || col > y ){
+            return false;
+        }
         if(BoardCopy.getMarker(row, col) == letter){
             return true;
         } else {
@@ -175,10 +178,10 @@ public class AIMedium implements gameLogicInterface{
     public void markBoard(Board opponent, BoardPrinterWrapper opboard, BoardPrinterWrapper playerboard) {
         if(isHit(row, col, 'x')) {
             solveBoard(row, col);
-            if(backTrack(row, col)){
+        } 
+        if(backTrack(row, col)){
                 markOrig(row, col);
-            } 
-        } else {
+            } else {
             if(markRandom(opponent.getXSize())){
                 markHit(row, col);
                 markOrig(row, col);
