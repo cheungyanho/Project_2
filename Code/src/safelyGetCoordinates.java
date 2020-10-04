@@ -103,6 +103,15 @@ public class safelyGetCoordinates implements gameLogicInterface{
                         markBoard(playerBoard, player1Printer, player2Printer);
                 } return true;
             case 2:
+                switch (playerBoard.getName()) {
+                    case "player1Board":
+                        broken1.runRadar();
+                        break;
+                    case "player2Board":
+                        broken2.runRadar();
+                        break;
+                } return true;
+            case 3:
                 return false;
         } return true;
 
@@ -121,6 +130,16 @@ public class safelyGetCoordinates implements gameLogicInterface{
             opboard.print(true);
             playerboard.print(true);
             System.out.println("It's a hit!");
+            switch(opponent.getName()){
+                case "player1Board":
+                    broken2.removeByCoordinate(broken2.convertCoor(getRow() - 1, getCol()));
+                break;
+                case "player2Board":
+                    broken1.removeByCoordinate(broken1.convertCoor(getRow() - 1, getCol()));
+                break;
+                default:
+                    broken1.removeByCoordinate(broken1.convertCoor(getRow() - 1, getCol()));
+            }
         } else {
             Utility.clearTerminal();
             opponent.addMarker('o', getRow() - 1, getCol());

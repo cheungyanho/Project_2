@@ -14,6 +14,7 @@ public class BrokenRadar {
     private LinkedList<String> Coordinates = new LinkedList<String>();
     private HashMap<Integer, String> used = new HashMap<Integer, String>();
     private HashMap<Integer, String> trueCombo = new HashMap<Integer, String>();
+    private HashMap<String, Integer> trueComboReverse = new HashMap<String, Integer>();
 
     public BrokenRadar(Board opponent){
         int temp = opponent.getNumberOfShips();
@@ -24,7 +25,7 @@ public class BrokenRadar {
         this.size = temp * (temp + 1) / 2;//1 + 2 + 3... is the number of locations with ships
     } 
 
-    private String convertCoor(int row, int col){
+    public String convertCoor(int row, int col){
         return Integer.toString(col) + coordinateLetters[row];
     }
 
@@ -41,18 +42,23 @@ public class BrokenRadar {
             int s = i * (i + 1)/2;
             for (int j = s; j < s + i; j++) {
                 trueCombo.put(j, set[j - s]);
+                trueComboReverse.put(set[j - s], j);
             }
             
         }
     }//N^2 complexity but better than a brute force search of the board
 
-    public void removeFromList(int location){
+    private void removeFromList(int location){
         String coor = trueCombo.get(location);
         trueCombo.remove(location, coor);
         used.put(location, coor);
     }
 
-    
+    public void removeByCoordinate(String coordinate){
+        int location = trueComboReverse.get(coordinate);
+        trueComboReverse.remove(coordinate, location);
+        removeFromList(location);
+    }
 
     private void getRealCoordinate(){
         int randomLoc = rand.nextInt(size);
@@ -60,7 +66,6 @@ public class BrokenRadar {
         do {
             if (trueCombo.containsKey(randomLoc)){
                 Coordinates.push(trueCombo.get(randomLoc));
-                removeFromList(randomLoc);
                 check = false;
             } else {
                 randomLoc = rand.nextInt(size);
