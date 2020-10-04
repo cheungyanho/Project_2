@@ -11,9 +11,9 @@ public class ship {
     private int counter;
 
     public ship(int size) {
-        this.size = size;
-        shipArray = new boolean[size];
-        for(int i = 0; i < size; i++) {
+        this.size = size + 1;
+        shipArray = new boolean[this.size];
+        for(int i = 0; i < this.size; i++) {
             shipArray[i] = false;
         }
         this.counter = 0;

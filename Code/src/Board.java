@@ -157,6 +157,10 @@ public class Board {
 		return copy;
 	}
 
+	public void setMapByCopy(Board copy) {
+		this.map = copy.getCopyMap();
+	}
+
 	/**
 	 * This returns a copy of the Board
 	 * <p>
