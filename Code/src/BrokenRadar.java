@@ -36,7 +36,7 @@ public class BrokenRadar {
             set = new String[i + 1];
             for(int j = 0; j < i + 1; j++){
                 set[j] = shipArray[i].getShipLoc(j);
-                System.out.println("in original array" + set[j]);
+                //System.out.println("in original array" + set[j]);
             }
             
             int s = 0;
@@ -44,15 +44,15 @@ public class BrokenRadar {
                 s = i * (i + 1)/2;
             }
             
-            for (int j = s; j < s + i; j++) {
+            for (int j = s; j < s + i + 1; j++) {
                 //System.out.println(j);
                 trueCombo.put(j, set[j - s]);
                 trueComboReverse.put(set[j - s], j);
-                //System.out.println(trueCombo.get(j));
+                //System.out.println("yung money " + trueComboReverse.get(set[j - s]));
             }
             
         }
-    }//N^2 complexity but better than a brute force search of the board
+    }//N^2 complexity but better than a brute force search of the board, technically from n(n+1)/2 complexity which is 
 
     private void removeFromList(int location){
         String coor = trueCombo.get(location);

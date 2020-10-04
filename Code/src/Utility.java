@@ -52,6 +52,11 @@ public class Utility {
       System.out.println("CHOICE:");
     }
 
+    public static void EnterToContinue(){
+      System.out.println("Type any key to continue.");
+      String nothing = consoleInput.next();
+    }
+
 
     public static void errorMessage(IllegalArgumentException iae, String message) {
         System.out.println(iae.getMessage());

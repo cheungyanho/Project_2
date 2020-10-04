@@ -102,7 +102,9 @@ public class safelyGetCoordinates implements gameLogicInterface{
                         break;
                     case "player2Board":
                         markBoard(other, player1Printer, player2Printer);
-                } return true;
+                } 
+                Utility.EnterToContinue();
+                return true;
             case 2:
                 switch (playerBoard.getName()) {
                     case "player1Board":
@@ -113,7 +115,9 @@ public class safelyGetCoordinates implements gameLogicInterface{
                         break;
                     default: 
                         broken1.runRadar();
-                } return true;
+                } 
+                Utility.EnterToContinue();
+                return true;
             case 3:
                 return false;
         } return true;
@@ -136,13 +140,14 @@ public class safelyGetCoordinates implements gameLogicInterface{
             switch(opponent.getName()){
                 case "player1Board":
                     broken2.removeByCoordinate(input);
-                break;
+                    break;
                 case "player2Board":
                     broken1.removeByCoordinate(input);
-                break;
+                    break;
                 default:
                     broken1.removeByCoordinate(input);
             }
+            
         } else {
             //Utility.clearTerminal();
             opponent.addMarker('o', getRow() - 1, getCol());
