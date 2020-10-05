@@ -38,7 +38,7 @@ public class AIEasy implements gameLogicInterface {
       do {
           row = rand.nextInt(size);
           col = rand.nextInt(size);
-      }while(origHit(row, col, 'o'));
+      }while(isHit(row, col, 'o') && isHit(row, col, 'x'));
       return isHit(row, col, 's');
     }
 
