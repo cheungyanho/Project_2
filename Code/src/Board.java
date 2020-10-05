@@ -301,10 +301,13 @@ public class Board {
 			if(sp[i].isSink() == false){
 				return false;
 			}
-		} return true;
+		}
+		System.out.println("The fleet has sunk! Good game."); 
+		return true;
 	}
 
 	public boolean fleetHasSunk(){
+		
 		return fleetSunk(theShips, numberOfShips);
 	}
 
